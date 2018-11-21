@@ -110,6 +110,9 @@ func (e *Exporter) ScrapeAlertlog() {
 
   ReadAccess()
   for conf, _ := range config.Cfgs {
+    if len(config.Cfgs[conf].Alertlog) < 1 {
+      continue
+    }
     var lastTime time.Time
     Errors = nil
     lastScrapeTime := e.GetLastScrapeTime(conf).Add(time.Second)
